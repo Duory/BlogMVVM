@@ -1,6 +1,6 @@
 package com.example.makovvictor.blogmvvm.posts;
 
-import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,7 +20,12 @@ import com.example.makovvictor.blogmvvm.data.model.Post;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class PostsFragment extends Fragment {
+
+    @Inject
+    ViewModelProvider.Factory viewModelFactory;
 
     private PostsViewModel mViewModel;
 
@@ -63,17 +68,14 @@ public class PostsFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(PostsViewModel.class);
+        mViewModel = ViewModelProviders.of(this, viewModelFactory).get(PostsViewModel.class);
         observeViewModel(mViewModel);
     }
 
     private void observeViewModel(PostsViewModel viewModel) {
 
-        viewModel.getPosts().observe(this, new Observer<List<Post>>() {
-            @Override
-            public void onChanged(@Nullable List<Post> posts) {
-                mListAdapter.replaceData(posts);
-            }
+        viewModel.getPosts().observe(this, posts -> {
+            mListAdapter.replaceData(posts);
         });
     }
 
