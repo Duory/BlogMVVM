@@ -1,4 +1,4 @@
-package com.example.makovvictor.blogmvvm.posts;
+package com.example.makovvictor.blogmvvm.ui.posts;
 
 import android.content.Context;
 import android.support.v4.view.ViewCompat;

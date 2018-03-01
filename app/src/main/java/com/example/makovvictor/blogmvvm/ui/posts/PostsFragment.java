@@ -1,10 +1,9 @@
-package com.example.makovvictor.blogmvvm.posts;
+package com.example.makovvictor.blogmvvm.ui.posts;
 
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -17,17 +16,22 @@ import android.widget.TextView;
 
 import com.example.makovvictor.blogmvvm.R;
 import com.example.makovvictor.blogmvvm.data.model.Post;
+import com.example.makovvictor.blogmvvm.di.Injectable;
+import com.example.makovvictor.blogmvvm.ui.NavigationController;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-public class PostsFragment extends Fragment {
+public class PostsFragment extends Fragment implements Injectable {
 
     @Inject
     ViewModelProvider.Factory viewModelFactory;
 
-    private PostsViewModel mViewModel;
+    @Inject
+    NavigationController navigationController;
+
+    private PostsViewModel postViewModel;
 
     private PostsAdapter mListAdapter;
 
@@ -42,7 +46,7 @@ public class PostsFragment extends Fragment {
         listView.setAdapter(mListAdapter);
 
         // Set up floating action button
-        FloatingActionButton fab = getActivity().findViewById(R.id.fab_add_post);
+        //FloatingActionButton fab = getActivity().findViewById(R.id.fab_add_post);
 
         // Set up progress indicator
         final ScrollSwipeRefreshLayout swipeRefreshLayout = root.findViewById(R.id.refresh_layout);
@@ -58,7 +62,7 @@ public class PostsFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mViewModel.init();
+                postViewModel.init();
             }
         });
 
@@ -68,8 +72,8 @@ public class PostsFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this, viewModelFactory).get(PostsViewModel.class);
-        observeViewModel(mViewModel);
+        postViewModel = ViewModelProviders.of(this, viewModelFactory).get(PostsViewModel.class);
+        observeViewModel(postViewModel);
     }
 
     private void observeViewModel(PostsViewModel viewModel) {

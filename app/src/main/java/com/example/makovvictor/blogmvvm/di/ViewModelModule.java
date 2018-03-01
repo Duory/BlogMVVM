@@ -3,7 +3,9 @@ package com.example.makovvictor.blogmvvm.di;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 
-import com.example.makovvictor.blogmvvm.posts.PostsViewModel;
+import com.example.makovvictor.blogmvvm.ui.posts.PostsViewModel;
+
+import javax.inject.Scope;
 
 import dagger.Binds;
 import dagger.Module;
@@ -14,12 +16,11 @@ import dagger.multibindings.IntoMap;
  */
 
 @Module
-public abstract class ViewModelModule {
-
+abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(PostsViewModel.class)
-    abstract ViewModel bindPostsViewModel(PostsViewModel postsViewModel);
+    abstract ViewModel postsViewModel(PostsViewModel postsViewModel);
 
     @Binds
     abstract ViewModelProvider.Factory bindViewModelFactory(BlogViewModelFactory factory);

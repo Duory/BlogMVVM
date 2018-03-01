@@ -2,19 +2,24 @@ package com.example.makovvictor.blogmvvm.di;
 
 import android.app.Application;
 
-import com.example.makovvictor.blogmvvm.posts.PostsFragment;
+import com.example.makovvictor.blogmvvm.BlogApp;
 
 import javax.inject.Singleton;
 
 import dagger.BindsInstance;
 import dagger.Component;
+import dagger.android.AndroidInjectionModule;
 
 /**
  * Created by victor.makov on 28.02.18.
  */
 
 @Singleton
-@Component(modules = AppModule.class)
+@Component(modules = {
+        AndroidInjectionModule.class,
+        AppModule.class,
+        MainActivityModule.class
+})
 public interface AppComponent {
 
     @Component.Builder
@@ -23,6 +28,6 @@ public interface AppComponent {
         AppComponent build();
     }
 
-    void inject(PostsFragment postsFragment);
+    void inject(BlogApp blogApp);
 
 }

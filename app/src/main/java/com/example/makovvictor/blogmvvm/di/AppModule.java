@@ -1,21 +1,17 @@
 package com.example.makovvictor.blogmvvm.di;
 
 import android.app.Application;
-import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.persistence.room.Room;
 
 import com.example.makovvictor.blogmvvm.data.source.local.BlogDatabase;
 import com.example.makovvictor.blogmvvm.data.source.local.PostDao;
 import com.example.makovvictor.blogmvvm.data.source.remote.PostApiService;
-import com.example.makovvictor.blogmvvm.posts.PostsViewModel;
 
 import javax.inject.Singleton;
 
-import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
-import dagger.multibindings.IntoMap;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -24,7 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 @Module(includes = ViewModelModule.class)
-public class AppModule {
+class AppModule {
 
     @Singleton
     @Provides
@@ -47,4 +43,5 @@ public class AppModule {
     PostDao providePostDao(BlogDatabase blogDatabase) {
         return blogDatabase.postDao();
     }
+
 }
