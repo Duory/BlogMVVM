@@ -5,7 +5,9 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.arch.persistence.room.Room;
 
 import com.example.makovvictor.blogmvvm.data.source.local.BlogDatabase;
+import com.example.makovvictor.blogmvvm.data.source.local.CommentDao;
 import com.example.makovvictor.blogmvvm.data.source.local.PostDao;
+import com.example.makovvictor.blogmvvm.data.source.remote.CommentApiService;
 import com.example.makovvictor.blogmvvm.data.source.remote.PostApiService;
 
 import javax.inject.Singleton;
@@ -34,6 +36,16 @@ class AppModule {
 
     @Singleton
     @Provides
+    CommentApiService provideCommentApiService() {
+        return new Retrofit.Builder()
+                .baseUrl("https://jsonplaceholder.typicode.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .create(CommentApiService.class);
+    }
+
+    @Singleton
+    @Provides
     BlogDatabase provideBlogDb(Application application) {
         return Room.databaseBuilder(application, BlogDatabase.class, "blog.db").build();
     }
@@ -42,6 +54,12 @@ class AppModule {
     @Provides
     PostDao providePostDao(BlogDatabase blogDatabase) {
         return blogDatabase.postDao();
+    }
+
+    @Singleton
+    @Provides
+    CommentDao provideCommentDao(BlogDatabase blogDatabase) {
+        return blogDatabase.commentDao();
     }
 
 }

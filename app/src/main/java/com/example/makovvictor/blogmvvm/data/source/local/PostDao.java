@@ -21,6 +21,12 @@ public interface PostDao {
     @Insert(onConflict = REPLACE)
     void savePosts(List<Post> posts);
 
+    @Insert(onConflict = REPLACE)
+    void savePost(Post post);
+
     @Query("SELECT * FROM posts")
     LiveData<List<Post>> getAllPosts();
+
+    @Query("SELECT * FROM posts WHERE id =:postId")
+    LiveData<Post> getPost(Integer postId);
 }

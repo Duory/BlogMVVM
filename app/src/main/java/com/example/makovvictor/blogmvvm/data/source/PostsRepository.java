@@ -51,4 +51,21 @@ public class PostsRepository {
     }
 
 
+    public LiveData<Post> getPost(Integer postId) {
+
+        refreshPost(postId);
+
+        return postDao.getPost(postId);
+    }
+
+    private void refreshPost(Integer postId) {
+        executors.diskIO().execute(() -> {
+            try {
+                Response response = postsApiService.getPost(postId).execute();
+                postDao.savePost((Post) response.body());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+    }
 }
