@@ -14,6 +14,7 @@ import android.support.v4.app.FragmentManager;
 import com.example.makovvictor.blogmvvm.BlogApp;
 
 import dagger.android.AndroidInjection;
+import dagger.android.support.AndroidSupportInjection;
 import dagger.android.support.HasSupportFragmentInjector;
 
 /**
@@ -75,7 +76,7 @@ public class AppInjector {
                                 public void onFragmentCreated(FragmentManager fm, Fragment f,
                                                               Bundle savedInstanceState) {
                                     if (f instanceof Injectable) {
-
+                                        AndroidSupportInjection.inject(f);
                                     }
                                 }
                             }, true);

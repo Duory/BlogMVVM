@@ -19,6 +19,7 @@ import com.example.makovvictor.blogmvvm.data.model.Post;
 import com.example.makovvictor.blogmvvm.di.Injectable;
 import com.example.makovvictor.blogmvvm.ui.NavigationController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -33,6 +34,7 @@ public class PostsFragment extends Fragment implements Injectable {
 
     private PostsViewModel postViewModel;
 
+
     private PostsAdapter mListAdapter;
 
     @Nullable
@@ -43,6 +45,7 @@ public class PostsFragment extends Fragment implements Injectable {
 
         // Set up posts list view
         ListView listView = root.findViewById(R.id.posts_list);
+        mListAdapter = new PostsAdapter(new ArrayList<Post>(0), mItemListener);
         listView.setAdapter(mListAdapter);
 
         // Set up floating action button
@@ -59,11 +62,9 @@ public class PostsFragment extends Fragment implements Injectable {
         // Set the scrolling view in the custom SwipeRefreshLayout.
         swipeRefreshLayout.setScrollUpChild(listView);
 
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                postViewModel.init();
-            }
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            postViewModel.init();
+            swipeRefreshLayout.setRefreshing(false);
         });
 
         return root;
@@ -73,6 +74,7 @@ public class PostsFragment extends Fragment implements Injectable {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         postViewModel = ViewModelProviders.of(this, viewModelFactory).get(PostsViewModel.class);
+        postViewModel.init();
         observeViewModel(postViewModel);
     }
 

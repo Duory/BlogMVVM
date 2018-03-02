@@ -38,7 +38,7 @@ dependencies {
     annotationProcessor "android.arch.persistence.room:compiler:1.0.0"
 
     // Paging
-    implementation "android.arch.paging:runtime:1.0.0-alpha6"
+    implementation "android.arch.paging:runtime:1.0.0-alpha5"
 
     // Retrofit2
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
