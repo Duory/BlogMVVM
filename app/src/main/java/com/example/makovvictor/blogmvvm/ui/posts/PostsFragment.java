@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,7 @@ import android.widget.TextView;
 import com.example.makovvictor.blogmvvm.R;
 import com.example.makovvictor.blogmvvm.data.model.Post;
 import com.example.makovvictor.blogmvvm.di.Injectable;
-import com.example.makovvictor.blogmvvm.ui.NavigationController;
+import com.example.makovvictor.blogmvvm.ui.common.NavigationController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,10 +33,8 @@ public class PostsFragment extends Fragment implements Injectable {
 
     private PostsViewModel postViewModel;
 
+    private PostsAdapter listAdapter;
 
-    private PostsAdapter mListAdapter;
-
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
@@ -45,8 +42,8 @@ public class PostsFragment extends Fragment implements Injectable {
 
         // Set up posts list view
         ListView listView = root.findViewById(R.id.posts_list);
-        mListAdapter = new PostsAdapter(new ArrayList<Post>(0), mItemListener);
-        listView.setAdapter(mListAdapter);
+        listAdapter = new PostsAdapter(new ArrayList<Post>(0), mItemListener);
+        listView.setAdapter(listAdapter);
 
         // Set up floating action button
         //FloatingActionButton fab = getActivity().findViewById(R.id.fab_add_post);
@@ -79,9 +76,8 @@ public class PostsFragment extends Fragment implements Injectable {
     }
 
     private void observeViewModel(PostsViewModel viewModel) {
-
         viewModel.getPosts().observe(this, posts -> {
-            mListAdapter.replaceData(posts);
+            listAdapter.replaceData(posts);
         });
     }
 
@@ -142,15 +138,13 @@ public class PostsFragment extends Fragment implements Injectable {
     }
 
     PostItemListener mItemListener = new PostItemListener() {
-
         @Override
         public void onPostClick(Post clickedPost) {
-
+            navigationController.navigateToPostDetails(clickedPost.getId());
         }
     };
 
     public interface PostItemListener {
-
         void onPostClick(Post clickedPost);
     }
 }

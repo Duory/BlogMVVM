@@ -1,5 +1,6 @@
 package com.example.makovvictor.blogmvvm.di;
 
+import com.example.makovvictor.blogmvvm.ui.postdetails.PostDetailsFragment;
 import com.example.makovvictor.blogmvvm.ui.posts.PostsFragment;
 
 import dagger.Module;
@@ -13,4 +14,6 @@ import dagger.android.ContributesAndroidInjector;
 public abstract class FragmentBuildersModule {
     @ContributesAndroidInjector
     abstract PostsFragment contributePostsFragment();
+    @ContributesAndroidInjector
+    abstract PostDetailsFragment contributePostDetailsFragment();
 }
