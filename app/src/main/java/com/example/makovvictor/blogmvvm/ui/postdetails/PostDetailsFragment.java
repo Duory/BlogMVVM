@@ -81,9 +81,7 @@ public class PostDetailsFragment extends Fragment implements Injectable {
             postTitle.setText(post.getTitle());
             postBody.setText(post.getBody());
         });
-        viewModel.getComments().observe(this, comments -> {
-            listAdapter.replaceData(comments);
-        });
+        viewModel.getComments().observe(this, comments -> listAdapter.replaceData(comments));
     }
 
     private static class CommentsAdapter extends BaseAdapter {

@@ -6,8 +6,6 @@ import android.arch.lifecycle.ViewModelProvider;
 import com.example.makovvictor.blogmvvm.ui.postdetails.PostDetailsViewModel;
 import com.example.makovvictor.blogmvvm.ui.posts.PostsViewModel;
 
-import javax.inject.Scope;
-
 import dagger.Binds;
 import dagger.Module;
 import dagger.multibindings.IntoMap;
