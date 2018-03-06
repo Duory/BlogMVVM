@@ -8,11 +8,17 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.makovvictor.blogmvvm.R;
+import com.example.makovvictor.blogmvvm.data.model.Comment;
 import com.example.makovvictor.blogmvvm.di.Injectable;
 import com.example.makovvictor.blogmvvm.ui.common.NavigationController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -35,7 +41,7 @@ public class PostDetailsFragment extends Fragment implements Injectable {
     private TextView postTitle;
     private TextView postBody;
 
-    //private CommentsAdapter listAdapter;
+    private CommentsAdapter listAdapter;
 
     public static PostDetailsFragment create(int postId) {
         PostDetailsFragment postDetailsFragment = new PostDetailsFragment();
@@ -53,6 +59,10 @@ public class PostDetailsFragment extends Fragment implements Injectable {
 
         postTitle = root.findViewById(R.id.post_details_title);
         postBody = root.findViewById(R.id.post_details_body);
+
+        ListView listView = root.findViewById(R.id.comments_list);
+        listAdapter = new CommentsAdapter(new ArrayList<>(0));
+        listView.setAdapter(listAdapter);
 
         return root;
     }
@@ -72,7 +82,58 @@ public class PostDetailsFragment extends Fragment implements Injectable {
             postBody.setText(post.getBody());
         });
         viewModel.getComments().observe(this, comments -> {
-            //TODO: display comments for post
+            listAdapter.replaceData(comments);
         });
+    }
+
+    private static class CommentsAdapter extends BaseAdapter {
+
+        private List<Comment> comments;
+
+        CommentsAdapter(List<Comment> comments) {
+            this.comments = comments;
+        }
+
+        void replaceData(List<Comment> comments) {
+            this.comments = comments;
+            notifyDataSetChanged();
+        }
+
+        @Override
+        public int getCount() {
+            return this.comments.size();
+        }
+
+        @Override
+        public Comment getItem(int position) {
+            return this.comments.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View rowView = convertView;
+            if (rowView == null) {
+                LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+                rowView = inflater.inflate(R.layout.comment_item, parent, false);
+            }
+
+            final Comment comment = getItem(position);
+
+            TextView commentAuthorName = rowView.findViewById(R.id.comment_author_name);
+            commentAuthorName.setText(comment.getName());
+
+            TextView commentAuthorEmail = rowView.findViewById(R.id.comment_author_email);
+            commentAuthorEmail.setText(comment.getEmail());
+
+            TextView commentBody = rowView.findViewById(R.id.comment_body);
+            commentBody.setText(comment.getBody());
+
+            return rowView;
+        }
     }
 }

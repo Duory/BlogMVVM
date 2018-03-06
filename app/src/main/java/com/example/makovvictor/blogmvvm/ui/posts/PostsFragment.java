@@ -42,7 +42,7 @@ public class PostsFragment extends Fragment implements Injectable {
 
         // Set up posts list view
         ListView listView = root.findViewById(R.id.posts_list);
-        listAdapter = new PostsAdapter(new ArrayList<Post>(0), mItemListener);
+        listAdapter = new PostsAdapter(new ArrayList<>(0), mItemListener);
         listView.setAdapter(listAdapter);
 
         // Set up floating action button
@@ -76,34 +76,32 @@ public class PostsFragment extends Fragment implements Injectable {
     }
 
     private void observeViewModel(PostsViewModel viewModel) {
-        viewModel.getPosts().observe(this, posts -> {
-            listAdapter.replaceData(posts);
-        });
+        viewModel.getPosts().observe(this, posts -> listAdapter.replaceData(posts));
     }
 
     private static class PostsAdapter extends BaseAdapter {
 
-        private List<Post> mPosts;
+        private List<Post> posts;
         private PostItemListener mItemListener;
 
-        public PostsAdapter(List<Post> posts, PostItemListener itemListener) {
-            mPosts = posts;
+        PostsAdapter(List<Post> posts, PostItemListener itemListener) {
+            this.posts = posts;
             mItemListener = itemListener;
         }
 
-        public void replaceData(List<Post> posts) {
-            mPosts = posts;
+        void replaceData(List<Post> posts) {
+            this.posts = posts;
             notifyDataSetChanged();
         }
 
         @Override
         public int getCount() {
-            return mPosts.size();
+            return this.posts.size();
         }
 
         @Override
         public Post getItem(int position) {
-            return mPosts.get(position);
+            return this.posts.get(position);
         }
 
         @Override
@@ -123,15 +121,11 @@ public class PostsFragment extends Fragment implements Injectable {
 
             TextView titleTextView = rowView.findViewById(R.id.title);
             titleTextView.setText(post.getTitle());
+
             TextView authorTextView = rowView.findViewById(R.id.author);
             authorTextView.setText(String.valueOf(post.getUserId()));
 
-            rowView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mItemListener.onPostClick(post);
-                }
-            });
+            rowView.setOnClickListener(v -> mItemListener.onPostClick(post));
 
             return rowView;
         }
