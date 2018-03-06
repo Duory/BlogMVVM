@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentManager;
 import com.example.makovvictor.blogmvvm.MainActivity;
 import com.example.makovvictor.blogmvvm.R;
 import com.example.makovvictor.blogmvvm.ui.postdetails.PostDetailsFragment;
+import com.example.makovvictor.blogmvvm.ui.posteditadd.PostEditAddFragment;
 import com.example.makovvictor.blogmvvm.ui.posts.PostsFragment;
 
 import javax.inject.Inject;
@@ -36,7 +37,23 @@ public class NavigationController {
     public void navigateToPostDetails(int postId) {
         PostDetailsFragment postDetailsFragment = PostDetailsFragment.create(postId);
         fragmentManager.beginTransaction()
-                .replace(containerId,postDetailsFragment)
+                .replace(containerId, postDetailsFragment)
+                .addToBackStack(null)
+                .commitAllowingStateLoss();
+    }
+
+    public void navigateToEditPost(int postId) {
+        PostEditAddFragment postEditAddFragment = PostEditAddFragment.create(postId);
+        fragmentManager.beginTransaction()
+                .replace(containerId, postEditAddFragment)
+                .addToBackStack(null)
+                .commitAllowingStateLoss();
+    }
+
+    public void navigateToAddPost() {
+        PostEditAddFragment postEditAddFragment = new PostEditAddFragment();
+        fragmentManager.beginTransaction()
+                .replace(containerId, postEditAddFragment)
                 .addToBackStack(null)
                 .commitAllowingStateLoss();
     }

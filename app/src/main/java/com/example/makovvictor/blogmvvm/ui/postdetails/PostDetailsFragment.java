@@ -51,7 +51,6 @@ public class PostDetailsFragment extends Fragment implements Injectable {
         return postDetailsFragment;
     }
 
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
