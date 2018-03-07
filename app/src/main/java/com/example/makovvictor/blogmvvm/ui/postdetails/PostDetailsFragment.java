@@ -4,6 +4,8 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,6 +60,14 @@ public class PostDetailsFragment extends Fragment implements Injectable {
 
         postTitle = root.findViewById(R.id.post_details_title);
         postBody = root.findViewById(R.id.post_details_body);
+
+        // Set up floating action button
+        FloatingActionButton fab = getActivity().findViewById(R.id.fab);
+        fab.setImageResource(R.drawable.ic_comment_24dp);
+
+        fab.setOnClickListener(v -> {
+
+        });
 
         ListView listView = root.findViewById(R.id.comments_list);
         listAdapter = new CommentsAdapter(new ArrayList<>(0));

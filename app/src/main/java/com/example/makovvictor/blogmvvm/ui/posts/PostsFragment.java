@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
@@ -46,7 +47,10 @@ public class PostsFragment extends Fragment implements Injectable {
         listView.setAdapter(listAdapter);
 
         // Set up floating action button
-        //FloatingActionButton fab = getActivity().findViewById(R.id.fab_add_post);
+        FloatingActionButton fab = getActivity().findViewById(R.id.fab);
+        fab.setImageResource(R.drawable.ic_add_24dp);
+
+        fab.setOnClickListener(v -> navigationController.navigateToAddPost());
 
         // Set up progress indicator
         final ScrollSwipeRefreshLayout swipeRefreshLayout = root.findViewById(R.id.refresh_layout);

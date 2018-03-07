@@ -32,24 +32,21 @@ public class PostsRepository {
 
     public LiveData<List<Post>> getAllPosts() {
 
-        refreshPosts(true);
+        refreshPosts();
 
         return postDao.getAllPosts();
     }
-
-    private void refreshPosts(boolean isForceUpdate) {
+    private void refreshPosts() {
         executors.diskIO().execute(() -> {
-            if (isForceUpdate) {
-                try {
-                    Response response = postsApiService.getAllPosts().execute();
-                    postDao.savePosts((List<Post>) response.body());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            try {
+                Response response = postsApiService.getAllPosts().execute();
+                postDao.savePosts((List<Post>) response.body());
+            }
+            catch (IOException e) {
+                e.printStackTrace();
             }
         });
     }
-
 
     public LiveData<Post> getPost(Integer postId) {
 
@@ -57,13 +54,27 @@ public class PostsRepository {
 
         return postDao.getPost(postId);
     }
-
     private void refreshPost(Integer postId) {
         executors.diskIO().execute(() -> {
             try {
                 Response response = postsApiService.getPost(postId).execute();
-                postDao.savePost((Post) response.body());
+                //Because remote data immutable our own resources really not created on server. So we do nothing if local data does not match remote.
+                if (response.isSuccessful()) {
+                    postDao.savePost((Post) response.body());
+                }
             } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    public void addPost(Post post) {
+        executors.diskIO().execute(() -> {
+            try {
+                Response response = postsApiService.addPost(post).execute();
+                postDao.savePost((Post) response.body());
+            }
+            catch (IOException e) {
                 e.printStackTrace();
             }
         });

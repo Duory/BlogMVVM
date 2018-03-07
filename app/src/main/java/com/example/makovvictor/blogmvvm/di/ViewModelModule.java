@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 
 import com.example.makovvictor.blogmvvm.ui.postdetails.PostDetailsViewModel;
+import com.example.makovvictor.blogmvvm.ui.posteditadd.PostEditAddViewModel;
 import com.example.makovvictor.blogmvvm.ui.posts.PostsViewModel;
 
 import dagger.Binds;
@@ -25,6 +26,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(PostDetailsViewModel.class)
     abstract ViewModel postDetailsViewModel(PostDetailsViewModel postDetailsViewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(PostEditAddViewModel.class)
+    abstract ViewModel postEditAddViewModel(PostEditAddViewModel postEditAddViewModel);
 
     @Binds
     abstract ViewModelProvider.Factory bindViewModelFactory(BlogViewModelFactory factory);

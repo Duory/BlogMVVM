@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">BlogMVVM</string>
+    <string name="edittext_post_title_hint">Enter title here</string>
+    <string name="edittext_post_body_hint">Enter body here</string>
+    <string name="empty_post_title">Empty post title</string>
+    <string name="empty_post_body">Empty post body</string>
+    <string name="post_added">Post successfully added</string>
 </resources>
