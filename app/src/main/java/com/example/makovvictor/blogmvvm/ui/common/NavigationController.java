@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 
 import com.example.makovvictor.blogmvvm.MainActivity;
 import com.example.makovvictor.blogmvvm.R;
+import com.example.makovvictor.blogmvvm.ui.commentadd.CommentAddFragment;
 import com.example.makovvictor.blogmvvm.ui.postdetails.PostDetailsFragment;
 import com.example.makovvictor.blogmvvm.ui.posteditadd.PostEditAddFragment;
 import com.example.makovvictor.blogmvvm.ui.posts.PostsFragment;
@@ -51,10 +52,22 @@ public class NavigationController {
     }
 
     public void navigateToAddPost() {
-        PostEditAddFragment postEditAddFragment = new PostEditAddFragment();
+        PostEditAddFragment postEditAddFragment = PostEditAddFragment.create();
         fragmentManager.beginTransaction()
                 .replace(containerId, postEditAddFragment)
                 .addToBackStack(null)
                 .commitAllowingStateLoss();
+    }
+
+    public void navigateToAddComment(int postId) {
+        CommentAddFragment commentAddFragment = CommentAddFragment.create(postId);
+        fragmentManager.beginTransaction()
+                .replace(containerId, commentAddFragment)
+                .addToBackStack(null)
+                .commitAllowingStateLoss();
+    }
+
+    public void navigateBack() {
+        fragmentManager.popBackStack();
     }
 }

@@ -1,5 +1,6 @@
 package com.example.makovvictor.blogmvvm.di;
 
+import com.example.makovvictor.blogmvvm.ui.commentadd.CommentAddFragment;
 import com.example.makovvictor.blogmvvm.ui.postdetails.PostDetailsFragment;
 import com.example.makovvictor.blogmvvm.ui.posteditadd.PostEditAddFragment;
 import com.example.makovvictor.blogmvvm.ui.posts.PostsFragment;
@@ -19,4 +20,6 @@ public abstract class FragmentBuildersModule {
     abstract PostDetailsFragment contributePostDetailsFragment();
     @ContributesAndroidInjector
     abstract PostEditAddFragment contributePostEditAddFragment();
+    @ContributesAndroidInjector
+    abstract CommentAddFragment contributeCommentAddFragment();
 }

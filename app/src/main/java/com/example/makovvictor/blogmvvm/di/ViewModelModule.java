@@ -3,6 +3,7 @@ package com.example.makovvictor.blogmvvm.di;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 
+import com.example.makovvictor.blogmvvm.ui.commentadd.CommentAddViewModel;
 import com.example.makovvictor.blogmvvm.ui.postdetails.PostDetailsViewModel;
 import com.example.makovvictor.blogmvvm.ui.posteditadd.PostEditAddViewModel;
 import com.example.makovvictor.blogmvvm.ui.posts.PostsViewModel;
@@ -31,6 +32,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(PostEditAddViewModel.class)
     abstract ViewModel postEditAddViewModel(PostEditAddViewModel postEditAddViewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CommentAddViewModel.class)
+    abstract ViewModel commentAddViewModel(CommentAddViewModel commentAddViewModel);
 
     @Binds
     abstract ViewModelProvider.Factory bindViewModelFactory(BlogViewModelFactory factory);

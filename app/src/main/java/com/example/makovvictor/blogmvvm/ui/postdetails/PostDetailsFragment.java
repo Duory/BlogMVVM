@@ -5,7 +5,6 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -63,6 +62,11 @@ public class PostDetailsFragment extends Fragment implements Injectable {
 
         View root = inflater.inflate(R.layout.post_details_fragment, container, false);
 
+        // Set up list view
+        ListView listView = root.findViewById(R.id.comments_list);
+        listAdapter = new CommentsAdapter(new ArrayList<>(0));
+        listView.setAdapter(listAdapter);
+
         postTitle = root.findViewById(R.id.post_details_title);
         postBody = root.findViewById(R.id.post_details_body);
 
@@ -71,16 +75,11 @@ public class PostDetailsFragment extends Fragment implements Injectable {
         fab.setImageResource(R.drawable.ic_comment_24dp);
 
         fab.setOnClickListener(v -> {
-
+            navigationController.navigateToAddComment(getArguments().getInt(POST_ID_KEY));
         });
 
         // Allow editing
         setHasOptionsMenu(getArguments().getBoolean(IS_EDITABLE));
-
-        // Set up list view
-        ListView listView = root.findViewById(R.id.comments_list);
-        listAdapter = new CommentsAdapter(new ArrayList<>(0));
-        listView.setAdapter(listAdapter);
 
         return root;
     }

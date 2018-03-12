@@ -84,7 +84,10 @@ public class PostsRepository {
         executors.diskIO().execute(() -> {
             try {
                 Response response = postsApiService.updatePost(post.getId(), post).execute();
-                postDao.savePost((Post) response.body());
+                //Because remote data immutable our own resources really not created on server. So our created posts cant be updated on remote.
+                if (response.isSuccessful()) {
+                    postDao.savePost((Post) response.body());
+                }
             }
             catch (IOException e) {
                 e.printStackTrace();

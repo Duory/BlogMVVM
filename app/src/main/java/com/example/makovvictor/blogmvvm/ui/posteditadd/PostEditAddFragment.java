@@ -49,6 +49,13 @@ public class PostEditAddFragment extends Fragment implements Injectable {
         return postEditAddFragment;
     }
 
+    public static PostEditAddFragment create() {
+        PostEditAddFragment postEditAddFragment = new PostEditAddFragment();
+        Bundle bundle = new Bundle();
+        postEditAddFragment.setArguments(bundle);
+        return postEditAddFragment;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
@@ -68,7 +75,7 @@ public class PostEditAddFragment extends Fragment implements Injectable {
                 Snackbar.make(v, getString(R.string.empty_post_body), Snackbar.LENGTH_LONG).show();
             } else {
                 MainActivity activity = (MainActivity) getActivity();
-                if (getArguments().getBoolean(IS_EDITABLE)) {
+                if (getArguments().getBoolean(IS_EDITABLE, false)) {
                     int postId = getArguments().getInt(POST_ID_KEY);
                     postEditAddViewModel.updatePost(
                             postId,
@@ -94,7 +101,7 @@ public class PostEditAddFragment extends Fragment implements Injectable {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         postEditAddViewModel = ViewModelProviders.of(this, viewModelFactory).get(PostEditAddViewModel.class);
-        if (getArguments() != null) {
+        if (getArguments().get(POST_ID_KEY) != null) {
             postEditAddViewModel.init(getArguments().getInt(POST_ID_KEY));
             observeViewModel(postEditAddViewModel);
         }

@@ -2,7 +2,6 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/posts_details_scroll_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -13,25 +12,36 @@
         android:layout_marginEnd="@dimen/activity_horizontal_margin">
 
         <EditText
-            android:id="@+id/edittext_post_title"
+            android:id="@+id/edittext_comment_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:inputType="textMultiLine"
-            android:hint="@string/edittext_post_title_hint"
+            android:inputType="textPersonName"
+            android:hint="@string/hint_name"
             android:layout_marginTop="@dimen/activity_vertical_margin"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
         <EditText
-            android:id="@+id/edittext_post_body"
+            android:id="@+id/edittext_comment_email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:hint="@string/hint_email"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            app:layout_constraintTop_toBottomOf="@id/edittext_comment_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <EditText
+            android:id="@+id/edittext_comment_body"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:inputType="textMultiLine"
-            android:hint="@string/edittext_post_body_hint"
+            android:hint="@string/hint_comment_body"
             android:layout_marginTop="@dimen/activity_vertical_margin"
-            app:layout_constraintTop_toBottomOf="@id/edittext_post_title"
+            app:layout_constraintTop_toBottomOf="@id/edittext_comment_email"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent" />
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

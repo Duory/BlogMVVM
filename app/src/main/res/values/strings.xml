@@ -7,4 +7,11 @@
     <string name="post_added">Post successfully added</string>
     <string name="menu_item">Edit</string>
     <string name="post_updated">Post successfully updated</string>
+    <string name="hint_email">Enter email here</string>
+    <string name="hint_name">Enter name here</string>
+    <string name="hint_comment_body">Enter comment here</string>
+    <string name="empty_comment_body">Empty comment body</string>
+    <string name="empty_email">Empty email</string>
+    <string name="empty_name">Empty name</string>
+    <string name="comment_added">Comment successfully added</string>
 </resources>
