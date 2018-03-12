@@ -23,4 +23,7 @@ public interface CommentDao {
 
     @Insert(onConflict = REPLACE)
     void insertComments(List<Comment> comments);
+
+    @Insert(onConflict = REPLACE)
+    void saveComment(Comment body);
 }

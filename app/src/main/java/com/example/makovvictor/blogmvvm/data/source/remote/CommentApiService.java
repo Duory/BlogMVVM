@@ -5,7 +5,9 @@ import com.example.makovvictor.blogmvvm.data.model.Comment;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 /**
@@ -16,4 +18,7 @@ public interface CommentApiService {
 
     @GET("/posts/{id}/comments")
     Call<List<Comment>> getCommentsByPostId(@Path("id") int id);
+
+    @PUT("/comments")
+    Call<Comment> addComment(@Body Comment comment);
 }

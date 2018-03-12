@@ -50,4 +50,17 @@ public class CommentsRepository {
             }
         });
     }
+
+    public void addComment(Comment comment) {
+        executors.diskIO().execute(() -> {
+            try {
+                Response response = commentApiService.addComment(comment).execute();
+                commentDao.saveComment((Comment) response.body());
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+    }
 }
