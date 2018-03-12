@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.makovvictor.blogmvvm.MainActivity;
 import com.example.makovvictor.blogmvvm.R;
 import com.example.makovvictor.blogmvvm.di.Injectable;
 import com.example.makovvictor.blogmvvm.ui.common.NavigationController;
@@ -26,6 +27,7 @@ import javax.inject.Inject;
 public class PostEditAddFragment extends Fragment implements Injectable {
 
     private static final String POST_ID_KEY = "post_id";
+    private static final String IS_EDITABLE = "is_editable";
 
     @Inject
     ViewModelProvider.Factory viewModelFactory;
@@ -42,6 +44,7 @@ public class PostEditAddFragment extends Fragment implements Injectable {
         PostEditAddFragment postEditAddFragment = new PostEditAddFragment();
         Bundle bundle = new Bundle();
         bundle.putInt(POST_ID_KEY, postId);
+        bundle.putBoolean(IS_EDITABLE, true);
         postEditAddFragment.setArguments(bundle);
         return postEditAddFragment;
     }
@@ -64,8 +67,22 @@ public class PostEditAddFragment extends Fragment implements Injectable {
             } else if (isEmpty(postBody)) {
                 Snackbar.make(v, getString(R.string.empty_post_body), Snackbar.LENGTH_LONG).show();
             } else {
-                postEditAddViewModel.addPost(postTitle.getText().toString(), postBody.getText().toString());
-                Snackbar.make(v, getString(R.string.post_added), Snackbar.LENGTH_LONG).show();
+                MainActivity activity = (MainActivity) getActivity();
+                if (getArguments().getBoolean(IS_EDITABLE)) {
+                    int postId = getArguments().getInt(POST_ID_KEY);
+                    postEditAddViewModel.updatePost(
+                            postId,
+                            postTitle.getText().toString(),
+                            postBody.getText().toString(),
+                            activity.getCurrentUserId());
+                    Snackbar.make(v, getString(R.string.post_updated), Snackbar.LENGTH_LONG).show();
+                } else {
+                    postEditAddViewModel.addPost(
+                            postTitle.getText().toString(),
+                            postBody.getText().toString(),
+                            activity.getCurrentUserId());
+                    Snackbar.make(v, getString(R.string.post_added), Snackbar.LENGTH_LONG).show();
+                }
                 navigationController.navigateToPosts();
             }
         });

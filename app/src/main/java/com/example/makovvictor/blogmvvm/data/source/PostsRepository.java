@@ -79,4 +79,16 @@ public class PostsRepository {
             }
         });
     }
+
+    public void updatePost(Post post) {
+        executors.diskIO().execute(() -> {
+            try {
+                Response response = postsApiService.updatePost(post.getId(), post).execute();
+                postDao.savePost((Post) response.body());
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+    }
 }

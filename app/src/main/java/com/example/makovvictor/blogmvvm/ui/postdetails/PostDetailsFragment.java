@@ -8,6 +8,9 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -31,6 +34,7 @@ import javax.inject.Inject;
 public class PostDetailsFragment extends Fragment implements Injectable {
 
     private static final String POST_ID_KEY = "post_id";
+    private static final String IS_EDITABLE = "is_editable";
 
     @Inject
     ViewModelProvider.Factory viewModelFactory;
@@ -45,10 +49,11 @@ public class PostDetailsFragment extends Fragment implements Injectable {
 
     private CommentsAdapter listAdapter;
 
-    public static PostDetailsFragment create(int postId) {
+    public static PostDetailsFragment create(int postId, boolean isEditable) {
         PostDetailsFragment postDetailsFragment = new PostDetailsFragment();
         Bundle bundle = new Bundle();
         bundle.putInt(POST_ID_KEY, postId);
+        bundle.putBoolean(IS_EDITABLE, isEditable);
         postDetailsFragment.setArguments(bundle);
         return postDetailsFragment;
     }
@@ -69,11 +74,30 @@ public class PostDetailsFragment extends Fragment implements Injectable {
 
         });
 
+        // Allow editing
+        setHasOptionsMenu(getArguments().getBoolean(IS_EDITABLE));
+
+        // Set up list view
         ListView listView = root.findViewById(R.id.comments_list);
         listAdapter = new CommentsAdapter(new ArrayList<>(0));
         listView.setAdapter(listAdapter);
 
         return root;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.post_details_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.edit_menu_item:
+                navigationController.navigateToEditPost(getArguments().getInt(POST_ID_KEY));
+                return true;
+        }
+        return false;
     }
 
     @Override

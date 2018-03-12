@@ -5,4 +5,6 @@
     <string name="empty_post_title">Empty post title</string>
     <string name="empty_post_body">Empty post body</string>
     <string name="post_added">Post successfully added</string>
+    <string name="menu_item">Edit</string>
+    <string name="post_updated">Post successfully updated</string>
 </resources>

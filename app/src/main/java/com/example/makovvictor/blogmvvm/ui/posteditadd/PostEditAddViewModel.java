@@ -14,7 +14,6 @@ import javax.inject.Inject;
 
 public class PostEditAddViewModel extends ViewModel {
 
-    private static final Integer CURRENT_USER_ID = 3;
     private LiveData<Post> post;
 
     private PostsRepository postsRepo;
@@ -35,11 +34,20 @@ public class PostEditAddViewModel extends ViewModel {
         return this.post;
     }
 
-    public void addPost(String postTitle, String postBody) {
+    public void addPost(String postTitle, String postBody, int currentUserId) {
         Post post = new Post();
         post.setTitle(postTitle);
         post.setBody(postBody);
-        post.setUserId(CURRENT_USER_ID);
+        post.setUserId(currentUserId);
         postsRepo.addPost(post);
+    }
+
+    public void updatePost(int postId, String postTitle, String postBody, int currentUserId) {
+        Post post = new Post();
+        post.setId(postId);
+        post.setTitle(postTitle);
+        post.setBody(postBody);
+        post.setUserId(currentUserId);
+        postsRepo.updatePost(post);
     }
 }

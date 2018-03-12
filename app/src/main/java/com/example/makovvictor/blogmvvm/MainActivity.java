@@ -14,6 +14,8 @@ import dagger.android.support.HasSupportFragmentInjector;
 
 public class MainActivity extends AppCompatActivity implements HasSupportFragmentInjector {
 
+    private int currentUserId = 3;
+
     @Inject
     DispatchingAndroidInjector<Fragment> dispatchingAndroidInjector;
     @Inject
@@ -31,5 +33,9 @@ public class MainActivity extends AppCompatActivity implements HasSupportFragmen
     @Override
     public AndroidInjector<Fragment> supportFragmentInjector() {
         return dispatchingAndroidInjector;
+    }
+
+    public int getCurrentUserId() {
+        return currentUserId;
     }
 }

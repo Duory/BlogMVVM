@@ -34,8 +34,8 @@ public class NavigationController {
                 .commitAllowingStateLoss();
     }
 
-    public void navigateToPostDetails(int postId) {
-        PostDetailsFragment postDetailsFragment = PostDetailsFragment.create(postId);
+    public void navigateToPostDetails(int postId, boolean isEditable) {
+        PostDetailsFragment postDetailsFragment = PostDetailsFragment.create(postId, isEditable);
         fragmentManager.beginTransaction()
                 .replace(containerId, postDetailsFragment)
                 .addToBackStack(null)
