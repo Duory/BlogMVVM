@@ -71,8 +71,6 @@ public class PostDetailsFragment extends Fragment implements Injectable {
         postTitle = root.findViewById(R.id.post_details_title);
         postBody = root.findViewById(R.id.post_details_body);
 
-
-
         // Set up floating action button
         FloatingActionButton fab = getActivity().findViewById(R.id.fab);
         fab.setVisibility(View.GONE);
