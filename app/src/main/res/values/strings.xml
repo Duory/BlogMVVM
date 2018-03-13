@@ -20,4 +20,6 @@
     <string name="empty_password">Empty password</string>
     <string name="password_cleared">Master code. Password cleared</string>
     <string name="invalid_password">Invalid password</string>
+    <string name="enter_password">Enter your password</string>
+    <string name="confirm_password_button">Confirm</string>
 </resources>

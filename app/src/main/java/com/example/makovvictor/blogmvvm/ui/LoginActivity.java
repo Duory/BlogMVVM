@@ -9,6 +9,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.makovvictor.blogmvvm.R;
 
@@ -48,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
 
             Editor editor = mSharedPreferences.edit();
 
-            if (mPasswordEditText.getText().toString().equals("66")) {
+            if (mPasswordEditText.getText().toString().equals(MASTER_PASSWORD)) {
                 editor.clear();
                 editor.apply();
                 Snackbar.make(v, getString(R.string.password_cleared), Snackbar.LENGTH_LONG).show();
@@ -73,6 +74,9 @@ public class LoginActivity extends AppCompatActivity {
         mSharedPreferences = getPreferences(MODE_PRIVATE);
         if (mSharedPreferences.getAll().isEmpty()) {
             mIsFirstStart = true;
+            TextView mTextView = findViewById(R.id.textview_greet);
+            mTextView.setText(R.string.create_password);
+            mConfirmButton.setText(R.string.create_password_button);
         }
     }
 

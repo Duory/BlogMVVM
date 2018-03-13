@@ -14,6 +14,7 @@ import android.widget.EditText;
 
 import com.example.makovvictor.blogmvvm.R;
 import com.example.makovvictor.blogmvvm.di.Injectable;
+import com.example.makovvictor.blogmvvm.ui.MainActivity;
 import com.example.makovvictor.blogmvvm.ui.common.NavigationController;
 
 import javax.inject.Inject;
@@ -57,26 +58,35 @@ public class CommentAddFragment extends Fragment implements Injectable {
 
         // Set up floating action button
         FloatingActionButton fab = getActivity().findViewById(R.id.fab);
-        fab.setImageResource(R.drawable.ic_check_24dp);
+        fab.setVisibility(View.GONE);
 
-        fab.setOnClickListener(v -> {
-            if (isEmpty(commentBody)) {
-                Snackbar.make(v, getString(R.string.empty_comment_body), Snackbar.LENGTH_LONG).show();
-            } else if (isEmpty(email)) {
-                Snackbar.make(v, getString(R.string.empty_email), Snackbar.LENGTH_LONG).show();
-            } else if (isEmpty(name)) {
-                Snackbar.make(v, getString(R.string.empty_name), Snackbar.LENGTH_LONG).show();
-            } else {
-                commentAddViewModel.addComment(
-                        commentBody.getText().toString(),
-                        email.getText().toString(),
-                        name.getText().toString(),
-                        getArguments().getInt(POST_ID_KEY));
-                Snackbar.make(v, getString(R.string.comment_added), Snackbar.LENGTH_LONG).show();
-                navigationController.navigateBack();
-            }
+        if (((MainActivity) getActivity()).isOnline()) {
 
-        });
+            fab.setImageResource(R.drawable.ic_check_24dp);
+
+            fab.setOnClickListener(v -> {
+                if (isEmpty(commentBody)) {
+                    Snackbar.make(v, getString(R.string.empty_comment_body), Snackbar.LENGTH_LONG).show();
+                } else if (isEmpty(email)) {
+                    Snackbar.make(v, getString(R.string.empty_email), Snackbar.LENGTH_LONG).show();
+                } else if (isEmpty(name)) {
+                    Snackbar.make(v, getString(R.string.empty_name), Snackbar.LENGTH_LONG).show();
+                } else {
+                    commentAddViewModel.addComment(
+                            commentBody.getText().toString(),
+                            email.getText().toString(),
+                            name.getText().toString(),
+                            getArguments().getInt(POST_ID_KEY));
+                    Snackbar.make(v, getString(R.string.comment_added), Snackbar.LENGTH_LONG).show();
+                    navigationController.navigateBack();
+                }
+
+            });
+
+            fab.setVisibility(View.VISIBLE);
+        }
+
+
         return root;
     }
 

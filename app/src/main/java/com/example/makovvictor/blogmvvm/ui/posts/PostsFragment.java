@@ -49,9 +49,16 @@ public class PostsFragment extends Fragment implements Injectable {
 
         // Set up floating action button
         FloatingActionButton fab = getActivity().findViewById(R.id.fab);
-        fab.setImageResource(R.drawable.ic_add_24dp);
+        fab.setVisibility(View.GONE);
 
-        fab.setOnClickListener(v -> navigationController.navigateToAddPost());
+        if (((MainActivity) getActivity()).isOnline()) {
+
+            fab.setImageResource(R.drawable.ic_add_24dp);
+
+            fab.setOnClickListener(v -> navigationController.navigateToAddPost());
+
+            fab.setVisibility(View.VISIBLE);
+        }
 
         // Set up progress indicator
         final ScrollSwipeRefreshLayout swipeRefreshLayout = root.findViewById(R.id.refresh_layout);

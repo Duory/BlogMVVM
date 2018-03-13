@@ -63,35 +63,42 @@ public class PostEditAddFragment extends Fragment implements Injectable {
         postTitle = root.findViewById(R.id.edittext_post_title);
         postBody = root.findViewById(R.id.edittext_post_body);
 
+
         // Set up floating action button
         FloatingActionButton fab = getActivity().findViewById(R.id.fab);
-        fab.setImageResource(R.drawable.ic_check_24dp);
+        fab.setVisibility(View.GONE);
 
-        fab.setOnClickListener(v -> {
-            if (isEmpty(postTitle)) {
-                Snackbar.make(v, getString(R.string.empty_post_title), Snackbar.LENGTH_LONG).show();
-            } else if (isEmpty(postBody)) {
-                Snackbar.make(v, getString(R.string.empty_post_body), Snackbar.LENGTH_LONG).show();
-            } else {
-                MainActivity activity = (MainActivity) getActivity();
-                if (getArguments().getBoolean(IS_EDITABLE, false)) {
-                    int postId = getArguments().getInt(POST_ID_KEY);
-                    postEditAddViewModel.updatePost(
-                            postId,
-                            postTitle.getText().toString(),
-                            postBody.getText().toString(),
-                            activity.getCurrentUserId());
-                    Snackbar.make(v, getString(R.string.post_updated), Snackbar.LENGTH_LONG).show();
+        if (((MainActivity) getActivity()).isOnline()) {
+            fab.setImageResource(R.drawable.ic_check_24dp);
+
+            fab.setOnClickListener(v -> {
+                if (isEmpty(postTitle)) {
+                    Snackbar.make(v, getString(R.string.empty_post_title), Snackbar.LENGTH_LONG).show();
+                } else if (isEmpty(postBody)) {
+                    Snackbar.make(v, getString(R.string.empty_post_body), Snackbar.LENGTH_LONG).show();
                 } else {
-                    postEditAddViewModel.addPost(
-                            postTitle.getText().toString(),
-                            postBody.getText().toString(),
-                            activity.getCurrentUserId());
-                    Snackbar.make(v, getString(R.string.post_added), Snackbar.LENGTH_LONG).show();
+                    MainActivity activity = (MainActivity) getActivity();
+                    if (getArguments().getBoolean(IS_EDITABLE, false)) {
+                        int postId = getArguments().getInt(POST_ID_KEY);
+                        postEditAddViewModel.updatePost(
+                                postId,
+                                postTitle.getText().toString(),
+                                postBody.getText().toString(),
+                                activity.getCurrentUserId());
+                        Snackbar.make(v, getString(R.string.post_updated), Snackbar.LENGTH_LONG).show();
+                    } else {
+                        postEditAddViewModel.addPost(
+                                postTitle.getText().toString(),
+                                postBody.getText().toString(),
+                                activity.getCurrentUserId());
+                        Snackbar.make(v, getString(R.string.post_added), Snackbar.LENGTH_LONG).show();
+                    }
+                    navigationController.navigateToPosts();
                 }
-                navigationController.navigateToPosts();
-            }
-        });
+            });
+
+            fab.setVisibility(View.VISIBLE);
+        }
 
         return root;
     }

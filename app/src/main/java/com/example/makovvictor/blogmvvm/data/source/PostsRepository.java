@@ -40,7 +40,9 @@ public class PostsRepository {
         executors.diskIO().execute(() -> {
             try {
                 Response response = postsApiService.getAllPosts().execute();
-                postDao.savePosts((List<Post>) response.body());
+                if (response.isSuccessful()) {
+                    postDao.savePosts((List<Post>) response.body());
+                }
             }
             catch (IOException e) {
                 e.printStackTrace();
@@ -72,7 +74,9 @@ public class PostsRepository {
         executors.diskIO().execute(() -> {
             try {
                 Response response = postsApiService.addPost(post).execute();
-                postDao.savePost((Post) response.body());
+                if (response.isSuccessful()) {
+                    postDao.savePost((Post) response.body());
+                }
             }
             catch (IOException e) {
                 e.printStackTrace();

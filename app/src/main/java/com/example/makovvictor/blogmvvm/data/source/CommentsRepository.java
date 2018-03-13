@@ -39,12 +39,13 @@ public class CommentsRepository {
 
         return commentDao.getCommentsForPost(postId);
     }
-
     private void refreshComments(Integer postId) {
         executors.diskIO().execute(() -> {
             try {
                 Response response = commentApiService.getCommentsByPostId(postId).execute();
-                commentDao.insertComments((List<Comment>) response.body());
+                if (response.isSuccessful()) {
+                    commentDao.insertComments((List<Comment>) response.body());
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -55,7 +56,9 @@ public class CommentsRepository {
         executors.diskIO().execute(() -> {
             try {
                 Response response = commentApiService.addComment(comment).execute();
-                commentDao.saveComment((Comment) response.body());
+                if (response.isSuccessful()) {
+                    commentDao.saveComment((Comment) response.body());
+                }
             }
             catch (IOException e) {
                 e.printStackTrace();

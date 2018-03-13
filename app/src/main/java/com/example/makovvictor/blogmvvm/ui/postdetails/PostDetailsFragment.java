@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.example.makovvictor.blogmvvm.R;
 import com.example.makovvictor.blogmvvm.data.model.Comment;
 import com.example.makovvictor.blogmvvm.di.Injectable;
+import com.example.makovvictor.blogmvvm.ui.MainActivity;
 import com.example.makovvictor.blogmvvm.ui.common.NavigationController;
 
 import java.util.ArrayList;
@@ -70,16 +71,24 @@ public class PostDetailsFragment extends Fragment implements Injectable {
         postTitle = root.findViewById(R.id.post_details_title);
         postBody = root.findViewById(R.id.post_details_body);
 
+
+
         // Set up floating action button
         FloatingActionButton fab = getActivity().findViewById(R.id.fab);
-        fab.setImageResource(R.drawable.ic_comment_24dp);
+        fab.setVisibility(View.GONE);
+        if (((MainActivity) getActivity()).isOnline()) {
 
-        fab.setOnClickListener(v -> {
-            navigationController.navigateToAddComment(getArguments().getInt(POST_ID_KEY));
-        });
+            fab.setImageResource(R.drawable.ic_comment_24dp);
 
-        // Allow editing
-        setHasOptionsMenu(getArguments().getBoolean(IS_EDITABLE));
+            fab.setOnClickListener(v -> {
+                navigationController.navigateToAddComment(getArguments().getInt(POST_ID_KEY));
+            });
+
+            fab.setVisibility(View.VISIBLE);
+
+            // Allow editing
+            setHasOptionsMenu(getArguments().getBoolean(IS_EDITABLE));
+        }
 
         return root;
     }
@@ -105,7 +114,6 @@ public class PostDetailsFragment extends Fragment implements Injectable {
         postDetailsViewModel = ViewModelProviders.of(this, viewModelFactory).get(PostDetailsViewModel.class);
         postDetailsViewModel.init(getArguments().getInt(POST_ID_KEY));
         observeViewModel(postDetailsViewModel);
-
     }
 
     private void observeViewModel(PostDetailsViewModel viewModel) {
