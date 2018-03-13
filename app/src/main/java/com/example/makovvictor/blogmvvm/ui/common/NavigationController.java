@@ -6,7 +6,7 @@ package com.example.makovvictor.blogmvvm.ui.common;
 
 import android.support.v4.app.FragmentManager;
 
-import com.example.makovvictor.blogmvvm.MainActivity;
+import com.example.makovvictor.blogmvvm.ui.MainActivity;
 import com.example.makovvictor.blogmvvm.R;
 import com.example.makovvictor.blogmvvm.ui.commentadd.CommentAddFragment;
 import com.example.makovvictor.blogmvvm.ui.postdetails.PostDetailsFragment;

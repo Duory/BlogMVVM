@@ -14,4 +14,10 @@
     <string name="empty_email">Empty email</string>
     <string name="empty_name">Empty name</string>
     <string name="comment_added">Comment successfully added</string>
+    <string name="create_password">Create your password</string>
+    <string name="create_password_button">Create</string>
+    <string name="password_hint">Enter pasword here</string>
+    <string name="empty_password">Empty password</string>
+    <string name="password_cleared">Master code. Password cleared</string>
+    <string name="invalid_password">Invalid password</string>
 </resources>

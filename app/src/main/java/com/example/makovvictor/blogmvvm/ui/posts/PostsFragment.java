@@ -14,7 +14,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.makovvictor.blogmvvm.MainActivity;
+import com.example.makovvictor.blogmvvm.ui.MainActivity;
 import com.example.makovvictor.blogmvvm.R;
 import com.example.makovvictor.blogmvvm.data.model.Post;
 import com.example.makovvictor.blogmvvm.di.Injectable;

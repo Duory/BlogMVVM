@@ -1,6 +1,6 @@
 package com.example.makovvictor.blogmvvm.di;
 
-import com.example.makovvictor.blogmvvm.MainActivity;
+import com.example.makovvictor.blogmvvm.ui.MainActivity;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;

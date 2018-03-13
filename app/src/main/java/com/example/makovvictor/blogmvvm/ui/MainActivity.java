@@ -1,9 +1,10 @@
-package com.example.makovvictor.blogmvvm;
+package com.example.makovvictor.blogmvvm.ui;
 
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.makovvictor.blogmvvm.R;
 import com.example.makovvictor.blogmvvm.ui.common.NavigationController;
 
 import javax.inject.Inject;

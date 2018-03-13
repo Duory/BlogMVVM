@@ -11,9 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import com.example.makovvictor.blogmvvm.MainActivity;
+import com.example.makovvictor.blogmvvm.ui.MainActivity;
 import com.example.makovvictor.blogmvvm.R;
 import com.example.makovvictor.blogmvvm.di.Injectable;
 import com.example.makovvictor.blogmvvm.ui.common.NavigationController;
