@@ -10,7 +10,7 @@ import com.example.makovvictor.blogmvvm.data.model.Post;
  * Created by victor.makov on 28.02.18.
  */
 
-@Database(entities = {Post.class, Comment.class}, version = 1)
+@Database(entities = {Post.class, Comment.class}, version = 1, exportSchema = false)
 public abstract class BlogDatabase extends RoomDatabase {
     public abstract PostDao postDao();
     public abstract CommentDao commentDao();
