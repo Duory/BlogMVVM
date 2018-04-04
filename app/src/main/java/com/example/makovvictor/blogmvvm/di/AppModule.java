@@ -1,7 +1,6 @@
 package com.example.makovvictor.blogmvvm.di;
 
 import android.app.Application;
-import android.arch.lifecycle.ViewModelProvider;
 import android.arch.persistence.room.Room;
 
 import com.example.makovvictor.blogmvvm.data.source.local.BlogDatabase;

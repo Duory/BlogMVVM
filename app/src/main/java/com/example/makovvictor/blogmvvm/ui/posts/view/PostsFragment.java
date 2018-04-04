@@ -10,9 +10,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.makovvictor.blogmvvm.ui.MainActivity;
 import com.example.makovvictor.blogmvvm.R;
@@ -21,7 +19,6 @@ import com.example.makovvictor.blogmvvm.di.Injectable;
 import com.example.makovvictor.blogmvvm.ui.common.NavigationController;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -73,58 +70,6 @@ public class PostsFragment extends Fragment implements Injectable {
 
     private void observeViewModel(PostsViewModel viewModel) {
         viewModel.getPosts().observe(this, posts -> mListAdapter.replaceData(posts));
-    }
-
-    private static class PostsAdapter extends BaseAdapter {
-
-        private List<Post> posts;
-        private PostItemListener mItemListener;
-
-        PostsAdapter(List<Post> posts, PostItemListener itemListener) {
-            this.posts = posts;
-            mItemListener = itemListener;
-        }
-
-        void replaceData(List<Post> posts) {
-            this.posts = posts;
-            notifyDataSetChanged();
-        }
-
-        @Override
-        public int getCount() {
-            return this.posts.size();
-        }
-
-        @Override
-        public Post getItem(int position) {
-            return this.posts.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View rowView = convertView;
-            if (rowView == null) {
-                LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-                rowView = inflater.inflate(R.layout.post_item, parent, false);
-            }
-
-            final Post post = getItem(position);
-
-            TextView titleTextView = rowView.findViewById(R.id.title);
-            titleTextView.setText(post.getTitle());
-
-            TextView authorTextView = rowView.findViewById(R.id.author);
-            authorTextView.setText(String.valueOf(post.getUserId()));
-
-            rowView.setOnClickListener(v -> mItemListener.onPostClick(post));
-
-            return rowView;
-        }
     }
 
     PostItemListener mItemListener = new PostItemListener() {
