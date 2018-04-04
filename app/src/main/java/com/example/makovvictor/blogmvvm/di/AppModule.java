@@ -24,11 +24,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module(includes = ViewModelModule.class)
 class AppModule {
 
+    private static final String baseUrl = "https://jsonplaceholder.typicode.com/";
+
     @Singleton
     @Provides
     PostApiService providePostApiService() {
         return new Retrofit.Builder()
-                .baseUrl("https://jsonplaceholder.typicode.com/")
+                .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(PostApiService.class);
@@ -38,7 +40,7 @@ class AppModule {
     @Provides
     CommentApiService provideCommentApiService() {
         return new Retrofit.Builder()
-                .baseUrl("https://jsonplaceholder.typicode.com/")
+                .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(CommentApiService.class);
