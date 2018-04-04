@@ -3,6 +3,7 @@ package com.example.makovvictor.blogmvvm.ui.posts.detail;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -59,7 +60,7 @@ public class PostDetailsFragment extends Fragment implements Injectable {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.post_details_fragment, container, false);
 
@@ -78,9 +79,7 @@ public class PostDetailsFragment extends Fragment implements Injectable {
 
             fab.setImageResource(R.drawable.ic_comment_24dp);
 
-            fab.setOnClickListener(v -> {
-                navigationController.navigateToAddComment(getArguments().getInt(POST_ID_KEY));
-            });
+            fab.setOnClickListener(v -> navigationController.navigateToAddComment(getArguments().getInt(POST_ID_KEY)));
 
             fab.setVisibility(View.VISIBLE);
 
