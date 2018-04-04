@@ -1,6 +1,6 @@
 package com.example.makovvictor.blogmvvm.ui.common;
 
-/**
+/*
  * Created by victor.makov on 01.03.18.
  */
 
@@ -8,10 +8,10 @@ import android.support.v4.app.FragmentManager;
 
 import com.example.makovvictor.blogmvvm.ui.MainActivity;
 import com.example.makovvictor.blogmvvm.R;
-import com.example.makovvictor.blogmvvm.ui.commentadd.CommentAddFragment;
-import com.example.makovvictor.blogmvvm.ui.postdetails.PostDetailsFragment;
-import com.example.makovvictor.blogmvvm.ui.posteditadd.PostEditAddFragment;
-import com.example.makovvictor.blogmvvm.ui.posts.PostsFragment;
+import com.example.makovvictor.blogmvvm.ui.comments.editadd.CommentAddFragment;
+import com.example.makovvictor.blogmvvm.ui.posts.detail.PostDetailsFragment;
+import com.example.makovvictor.blogmvvm.ui.posts.editadd.PostEditAddFragment;
+import com.example.makovvictor.blogmvvm.ui.posts.view.PostsFragment;
 
 import javax.inject.Inject;
 

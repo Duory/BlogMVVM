@@ -1,4 +1,4 @@
-package com.example.makovvictor.blogmvvm.ui.commentadd;
+package com.example.makovvictor.blogmvvm.ui.comments.editadd;
 
 import android.arch.lifecycle.ViewModel;
 

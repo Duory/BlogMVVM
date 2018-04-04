@@ -3,10 +3,10 @@ package com.example.makovvictor.blogmvvm.di;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 
-import com.example.makovvictor.blogmvvm.ui.commentadd.CommentAddViewModel;
-import com.example.makovvictor.blogmvvm.ui.postdetails.PostDetailsViewModel;
-import com.example.makovvictor.blogmvvm.ui.posteditadd.PostEditAddViewModel;
-import com.example.makovvictor.blogmvvm.ui.posts.PostsViewModel;
+import com.example.makovvictor.blogmvvm.ui.comments.editadd.CommentAddViewModel;
+import com.example.makovvictor.blogmvvm.ui.posts.detail.PostDetailsViewModel;
+import com.example.makovvictor.blogmvvm.ui.posts.editadd.PostEditAddViewModel;
+import com.example.makovvictor.blogmvvm.ui.posts.view.PostsViewModel;
 
 import dagger.Binds;
 import dagger.Module;

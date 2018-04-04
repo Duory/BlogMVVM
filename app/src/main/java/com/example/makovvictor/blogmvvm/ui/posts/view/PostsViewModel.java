@@ -1,4 +1,4 @@
-package com.example.makovvictor.blogmvvm.ui.posts;
+package com.example.makovvictor.blogmvvm.ui.posts.view;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
