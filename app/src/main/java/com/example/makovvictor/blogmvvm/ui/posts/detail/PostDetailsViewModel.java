@@ -18,33 +18,33 @@ import javax.inject.Inject;
 
 public class PostDetailsViewModel extends ViewModel {
 
-    private LiveData<Post> post;
+    private LiveData<Post> mPost;
 
-    private LiveData<List<Comment>> comments;
+    private LiveData<List<Comment>> mComments;
 
-    private PostsRepository postsRepo;
+    private PostsRepository mPostsRepo;
 
-    private CommentsRepository commentsRepo;
+    private CommentsRepository mCommentsRepo;
 
     @Inject
     public PostDetailsViewModel(PostsRepository postsRepo, CommentsRepository commentsRepo) {
-        this.postsRepo = postsRepo;
-        this.commentsRepo = commentsRepo;
+        mPostsRepo = postsRepo;
+        mCommentsRepo = commentsRepo;
     }
 
     public void init(Integer postId){
-        if (this.post != null) {
+        if (this.mPost != null) {
             return;
         }
-        this.post = postsRepo.getPost(postId);
-        this.comments = commentsRepo.getCommentsForPost(postId);
+        mPost = mPostsRepo.getPost(postId);
+        mComments = mCommentsRepo.getCommentsForPost(postId);
     }
 
     public LiveData<Post> getPost() {
-        return this.post;
+        return mPost;
     }
 
     public LiveData<List<Comment>> getComments() {
-        return this.comments;
+        return mComments;
     }
 }

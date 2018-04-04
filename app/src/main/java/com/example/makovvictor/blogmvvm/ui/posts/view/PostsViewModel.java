@@ -13,23 +13,23 @@ import javax.inject.Inject;
 
 public class PostsViewModel extends ViewModel {
 
-    private LiveData<List<Post>> posts;
+    private LiveData<List<Post>> mPosts;
 
-    private PostsRepository postsRepo;
+    private PostsRepository mPostsRepo;
 
     @Inject
     public PostsViewModel(PostsRepository postsRepo) {
-        this.postsRepo = postsRepo;
+        mPostsRepo = postsRepo;
     }
 
     public void init() {
-        if (this.posts != null) {
+        if (mPosts != null) {
             return;
         }
-        this.posts = postsRepo.getAllPosts();
+        mPosts = mPostsRepo.getAllPosts();
     }
 
     public LiveData<List<Post>> getPosts() {
-        return this.posts;
+        return mPosts;
     }
 }

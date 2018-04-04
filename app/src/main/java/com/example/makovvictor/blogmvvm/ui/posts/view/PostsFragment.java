@@ -28,14 +28,14 @@ import javax.inject.Inject;
 public class PostsFragment extends Fragment implements Injectable {
 
     @Inject
-    ViewModelProvider.Factory viewModelFactory;
+    ViewModelProvider.Factory mViewModelFactory;
 
     @Inject
-    NavigationController navigationController;
+    NavigationController mNavigationController;
 
-    private PostsViewModel postViewModel;
+    private PostsViewModel mPostViewModel;
 
-    private PostsAdapter listAdapter;
+    private PostsAdapter mListAdapter;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -44,8 +44,8 @@ public class PostsFragment extends Fragment implements Injectable {
 
         // Set up posts list view
         ListView listView = root.findViewById(R.id.posts_list);
-        listAdapter = new PostsAdapter(new ArrayList<>(0), mItemListener);
-        listView.setAdapter(listAdapter);
+        mListAdapter = new PostsAdapter(new ArrayList<>(0), mItemListener);
+        listView.setAdapter(mListAdapter);
 
         // Set up floating action button
         FloatingActionButton fab = getActivity().findViewById(R.id.fab);
@@ -55,7 +55,7 @@ public class PostsFragment extends Fragment implements Injectable {
 
             fab.setImageResource(R.drawable.ic_add_24dp);
 
-            fab.setOnClickListener(v -> navigationController.navigateToAddPost());
+            fab.setOnClickListener(v -> mNavigationController.navigateToAddPost());
 
             fab.setVisibility(View.VISIBLE);
         }
@@ -66,13 +66,13 @@ public class PostsFragment extends Fragment implements Injectable {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        postViewModel = ViewModelProviders.of(this, viewModelFactory).get(PostsViewModel.class);
-        postViewModel.init();
-        observeViewModel(postViewModel);
+        mPostViewModel = ViewModelProviders.of(this, mViewModelFactory).get(PostsViewModel.class);
+        mPostViewModel.init();
+        observeViewModel(mPostViewModel);
     }
 
     private void observeViewModel(PostsViewModel viewModel) {
-        viewModel.getPosts().observe(this, posts -> listAdapter.replaceData(posts));
+        viewModel.getPosts().observe(this, posts -> mListAdapter.replaceData(posts));
     }
 
     private static class PostsAdapter extends BaseAdapter {
@@ -131,7 +131,7 @@ public class PostsFragment extends Fragment implements Injectable {
         @Override
         public void onPostClick(Post clickedPost) {
             MainActivity activity = (MainActivity) getActivity();
-            navigationController.navigateToPostDetails(clickedPost.getId(), (activity.getCurrentUserId() == clickedPost.getUserId()));
+            mNavigationController.navigateToPostDetails(clickedPost.getId(), (activity.getCurrentUserId() == clickedPost.getUserId()));
         }
     };
 

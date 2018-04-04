@@ -38,12 +38,12 @@ public class PostDetailsFragment extends Fragment implements Injectable {
     private static final String IS_EDITABLE = "is_editable";
 
     @Inject
-    ViewModelProvider.Factory viewModelFactory;
+    ViewModelProvider.Factory mViewModelFactory;
 
     @Inject
-    NavigationController navigationController;
+    NavigationController mNavigationController;
 
-    private PostDetailsViewModel postDetailsViewModel;
+    private PostDetailsViewModel mPostDetailsViewModel;
 
     private TextView postTitle;
     private TextView postBody;
@@ -79,7 +79,7 @@ public class PostDetailsFragment extends Fragment implements Injectable {
 
             fab.setImageResource(R.drawable.ic_comment_24dp);
 
-            fab.setOnClickListener(v -> navigationController.navigateToAddComment(getArguments().getInt(POST_ID_KEY)));
+            fab.setOnClickListener(v -> mNavigationController.navigateToAddComment(getArguments().getInt(POST_ID_KEY)));
 
             fab.setVisibility(View.VISIBLE);
 
@@ -99,7 +99,7 @@ public class PostDetailsFragment extends Fragment implements Injectable {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.edit_menu_item:
-                navigationController.navigateToEditPost(getArguments().getInt(POST_ID_KEY));
+                mNavigationController.navigateToEditPost(getArguments().getInt(POST_ID_KEY));
                 return true;
         }
         return false;
@@ -108,9 +108,9 @@ public class PostDetailsFragment extends Fragment implements Injectable {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        postDetailsViewModel = ViewModelProviders.of(this, viewModelFactory).get(PostDetailsViewModel.class);
-        postDetailsViewModel.init(getArguments().getInt(POST_ID_KEY));
-        observeViewModel(postDetailsViewModel);
+        mPostDetailsViewModel = ViewModelProviders.of(this, mViewModelFactory).get(PostDetailsViewModel.class);
+        mPostDetailsViewModel.init(getArguments().getInt(POST_ID_KEY));
+        observeViewModel(mPostDetailsViewModel);
     }
 
     private void observeViewModel(PostDetailsViewModel viewModel) {

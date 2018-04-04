@@ -3,7 +3,6 @@ package com.example.makovvictor.blogmvvm.ui;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements HasSupportFragmen
 
     private ConnectivityManager mConnectivityManager;
 
-    private int currentUserId = 3;
+    private int mCurrentUserId = 3;
 
     @Inject
     DispatchingAndroidInjector<Fragment> dispatchingAndroidInjector;
@@ -43,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements HasSupportFragmen
     }
 
     public int getCurrentUserId() {
-        return currentUserId;
+        return mCurrentUserId;
     }
 
     public boolean isOnline() {

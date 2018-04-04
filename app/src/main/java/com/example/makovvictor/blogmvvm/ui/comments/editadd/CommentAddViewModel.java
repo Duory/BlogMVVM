@@ -13,10 +13,10 @@ import javax.inject.Inject;
 
 public class CommentAddViewModel extends ViewModel {
 
-    private CommentsRepository commentsRepo;
+    private CommentsRepository mCommentsRepo;
 
     @Inject CommentAddViewModel(CommentsRepository commentsRepo) {
-        this.commentsRepo = commentsRepo;
+        mCommentsRepo = commentsRepo;
     }
 
     public void addComment(String commentBody, String email, String name, int postId) {
@@ -25,6 +25,6 @@ public class CommentAddViewModel extends ViewModel {
         comment.setEmail(email);
         comment.setBody(commentBody);
         comment.setPostId(postId);
-        commentsRepo.addComment(comment);
+        mCommentsRepo.addComment(comment);
     }
 }
