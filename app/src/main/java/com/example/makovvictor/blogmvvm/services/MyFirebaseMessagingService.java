@@ -18,8 +18,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         super.onMessageReceived(remoteMessage);
 
         if (remoteMessage.getData().get("id") != null) {
-            postsRepository.refreshPost(Integer.valueOf(
-                    remoteMessage.getData().get("id")));
+            if (postsRepository != null) {
+                postsRepository.refreshPost(Integer.valueOf(
+                        remoteMessage.getData().get("id")));
+            }
+
         }
     }
 }
