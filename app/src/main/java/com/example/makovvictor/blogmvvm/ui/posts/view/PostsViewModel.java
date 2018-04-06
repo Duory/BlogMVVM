@@ -22,7 +22,7 @@ public class PostsViewModel extends ViewModel {
         mPostsRepo = postsRepo;
     }
 
-    public void init() {
+    void init() {
         if (mPosts != null) {
             return;
         }

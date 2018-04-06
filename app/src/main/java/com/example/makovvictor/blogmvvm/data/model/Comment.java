@@ -8,7 +8,7 @@ import android.arch.persistence.room.PrimaryKey;
 import static android.arch.persistence.room.ForeignKey.CASCADE;
 
 /**
- * Created by victor.makov on 02.03.18.
+ * Model class for Comment
  */
 
 @Entity(tableName = "comments",

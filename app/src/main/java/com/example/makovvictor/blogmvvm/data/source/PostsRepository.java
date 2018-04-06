@@ -9,6 +9,8 @@ import com.example.makovvictor.blogmvvm.data.source.remote.PostApiService;
 import com.example.makovvictor.blogmvvm.util.AppExecutors;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -56,7 +58,7 @@ public class PostsRepository {
 
         return postDao.getPost(postId);
     }
-    private void refreshPost(Integer postId) {
+    public void refreshPost(Integer postId) {
         executors.diskIO().execute(() -> {
             try {
                 Response response = postsApiService.getPost(postId).execute();

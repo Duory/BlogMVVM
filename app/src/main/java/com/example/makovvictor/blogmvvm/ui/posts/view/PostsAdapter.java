@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.example.makovvictor.blogmvvm.R;
 import com.example.makovvictor.blogmvvm.data.model.Post;
 
+import java.util.Collections;
 import java.util.List;
 
 public class PostsAdapter extends BaseAdapter {
@@ -17,11 +18,13 @@ public class PostsAdapter extends BaseAdapter {
     private PostsFragment.PostItemListener mItemListener;
 
     PostsAdapter(List<Post> posts, PostsFragment.PostItemListener itemListener) {
+        Collections.reverse(posts);
         mPosts = posts;
         mItemListener = itemListener;
     }
 
     void replaceData(List<Post> posts) {
+        Collections.reverse(posts);
         mPosts = posts;
         notifyDataSetChanged();
     }

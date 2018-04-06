@@ -19,7 +19,7 @@ public class CommentAddViewModel extends ViewModel {
         mCommentsRepo = commentsRepo;
     }
 
-    public void addComment(String commentBody, String email, String name, int postId) {
+    void addComment(String commentBody, String email, String name, int postId) {
         Comment comment = new Comment();
         comment.setName(name);
         comment.setEmail(email);

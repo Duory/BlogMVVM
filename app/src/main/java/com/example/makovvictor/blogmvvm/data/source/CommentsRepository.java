@@ -27,7 +27,7 @@ public class CommentsRepository {
     private final AppExecutors executors;
 
     @Inject
-    public CommentsRepository(CommentApiService commentApiService, CommentDao commentDao, AppExecutors executors) {
+    CommentsRepository(CommentApiService commentApiService, CommentDao commentDao, AppExecutors executors) {
         this.commentApiService = commentApiService;
         this.commentDao = commentDao;
         this.executors = executors;
